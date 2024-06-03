@@ -1,0 +1,80 @@
+/* styles/about.css */
+
+.about-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.about-heading {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333; /* Dark gray */
+}
+
+.about-text {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  color: #666; /* Medium gray */
+}
+
+.about-text:first-child {
+  color: #000; /* Black for the first paragraph */
+}
+
+.about-highlight {
+  color: #007bff; /* Blue */
+  font-weight: bold;
+}
+
+.image-section {
+  padding: 20px;
+  text-align: center;
+}
+
+.image-section h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.image-cards {
+  display: flex;
+  justify-content: center;
+}
+
+.image-card img {
+  max-width: 250px;
+  max-height: 250px;
+  object-fit: contain;
+}
+
+.image-card {
+  background-color: rgb(244, 239, 239);
+  padding: 15px;
+  margin: 10px;
+  width: 250px; /* Adjust the width of the image card */
+  height: 200px; /* Adjust the height of the image card */
+  transition: transform 0.3s ease-in-out; /* Add transition for smooth effect */
+}
+
+.image-card:hover {
+  transform: scale(1.1); /* Scale up the card on hover */
+}
+
+.contact-info {
+  background-color: #f4f4f4; /* Light gray */
+  padding: 20px;
+  text-align: center;
+}
+
+.contact-info h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.contact-info p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
