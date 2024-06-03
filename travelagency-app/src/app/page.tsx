@@ -12,10 +12,10 @@ const page = () => {
       <main className={styles.main}>
         <h1>Dobro došli na početnu stranicu.</h1>
         <div className={styles.flexContainer}>
+          <FlexItem title="About" />
           <FlexItem title="Travel" />
           <FlexItem title="Gallery" />
-          <FlexItem title="About" />
-          <FlexItem title="Users" />
+          <FlexItem title="Contact Us" />
         </div>
       </main>
     </div>
@@ -64,10 +64,32 @@ const FlexItem: React.FC<FlexItemProps> = ({ title }) => {
     case "About":
       content = (
         <>
+          <h2>{title}</h2>
           <div>
-            <h4>I will put some about info and contact info here.</h4>
+            <p className="about-text">
+              Our team of expert travel advisors is here to help you plan your
+              dream vacation from start to finish. With our extensive knowledge
+              and personalized service, we'll create a tailor-made itinerary
+              that suits your interests, budget, and travel style.
+              <br />
+              <br />
+              So why wait? Start planning your next adventure today and let us
+              take you on the trip of a lifetime!
+            </p>
           </div>
           {/* Content specific to About */}
+        </>
+      );
+      break;
+    case "Contact Us":
+      content = (
+        <>
+          <h2>{title}</h2>
+          <div>
+            <p>Email: info@travelagency.com</p>
+            <p>Phone: 123-456-7890</p>
+            <p>Address: 123 Main Street, Adventure City, AC 12345</p>
+          </div>
         </>
       );
       break;
