@@ -1,7 +1,14 @@
 import React from "react";
+import prisma from "../../../prisma/db";
+import DataTable from "./DataTable";
 
-const Travel = () => {
-  return <div>Travel</div>;
+const Travel = async () => {
+  const travel = await prisma.travelDestination.findMany();
+  return (
+    <div>
+      <DataTable trips={travel} />
+    </div>
+  );
 };
 
 export default Travel;
