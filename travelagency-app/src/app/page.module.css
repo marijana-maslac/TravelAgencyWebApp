@@ -25,6 +25,12 @@
 }
 
 .flexItem a {
+  font-family: "Your Chosen Font", sans-serif; /* Replace 'Your Chosen Font' with the font you want */
+  color: #5f5b5b;
   text-decoration: none;
-  color: blue;
+}
+
+.flexItem a:hover {
+  color: #ff9900; /* Change color on hover */
+  text-decoration: underline; /* Add underline on hover */
 }

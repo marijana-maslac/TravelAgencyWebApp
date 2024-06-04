@@ -3,17 +3,19 @@ import Link from "next/link";
 
 const MainNav = () => {
   return (
-    <div className="nav-links">
-      <div className="nav-links-gap">
-        <Link href="/">Home</Link>
+    <div className="main-container">
+      <div className="logo-container">
+        <Link href="/">
+          <img src="/images/logo.png" alt="Logo" className="logo" />
+        </Link>
       </div>
-      <div className="nav-links-gap">
-        <Link href="/travel">Travel</Link>
-        <Link href="/about">About</Link>
-        <Link href="/search">Search</Link>
-        <Link href="/users">Users</Link>
-        <Link href="/">Logout</Link>
-      </div>
+      <nav className="navbar">
+        <Link href="/">HOME</Link>
+        <Link href="/travel">TRAVEL</Link>
+        <Link href="/about">ABOUT</Link>
+        <Link href="/search">SEARCH</Link>
+        <Link href="/">LOGOUT</Link>
+      </nav>
     </div>
   );
 };
