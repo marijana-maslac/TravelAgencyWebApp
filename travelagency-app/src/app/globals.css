@@ -36,3 +36,19 @@ a {
   width: 190px; /* Adjust the width of the logo */
   display: block; /* Ensure the image doesn't have extra space below */
 }
+.link-button {
+  display: inline-block;
+  background-color: transparent;
+  color: #ff9900;
+  padding: 5px 10px;
+  border: 2px solid #ff9900;
+  border-radius: 5px;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link-button:hover {
+  background-color: #ff9900;
+  color: #fff;
+}
