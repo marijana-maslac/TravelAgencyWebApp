@@ -6,35 +6,37 @@ const About = () => {
     <div>
       <div className="about-container">
         <h1 className="about-heading">About Us</h1>
-        <p className="about-text">
-          Welcome to <span className="about-highlight">Travel Agency</span> -
-          your go-to trip advisor for unforgettable journeys around the world!
-        </p>
-        <p className="about-text">
-          At <span className="about-highlight">Travel Agency</span>, we're
-          passionate about travel and dedicated to providing our customers with
-          the best possible experiences. Whether you're seeking a relaxing beach
-          getaway, an exciting adventure tour, or a cultural immersion in a
-          far-off land, we've got you covered.
-        </p>
-        <p className="about-text">
-          Our team of expert travel advisors is here to help you plan your dream
-          vacation from start to finish. With our extensive knowledge and
-          personalized service, we'll create a tailor-made itinerary that suits
-          your interests, budget, and travel style.
-        </p>
-        <p className="about-text">
-          We believe that travel has the power to enrich lives, create memories,
-          and foster connections with people and places around the globe. That's
-          why we're committed to making your travel dreams a reality and
-          ensuring that every journey with{" "}
-          <span className="about-highlight">Travel Agency</span> is an
-          unforgettable experience.
-        </p>
-        <p className="about-text">
-          So why wait? Start planning your next adventure today and let us take
-          you on the trip of a lifetime!
-        </p>
+        <div className="about-column">
+          <p className="about-text">
+            Welcome to <span className="about-highlight">Travel Agency</span> -
+            your go-to trip advisor for unforgettable journeys around the world!
+          </p>
+          <p className="about-text">
+            At <span className="about-highlight">Travel Agency</span>, we're
+            passionate about travel and dedicated to providing our customers
+            with the best possible experiences. Whether you're seeking a
+            relaxing beach getaway, an exciting adventure tour, or a cultural
+            immersion in a far-off land, we've got you covered.
+          </p>
+          <p className="about-text">
+            Our team of expert travel advisors is here to help you plan your
+            dream vacation from start to finish. With our extensive knowledge
+            and personalized service, we'll create a tailor-made itinerary that
+            suits your interests, budget, and travel style.
+          </p>
+          <p className="about-text">
+            We believe that travel has the power to enrich lives, create
+            memories, and foster connections with people and places around the
+            globe. That's why we're committed to making your travel dreams a
+            reality and ensuring that every journey with{" "}
+            <span className="about-highlight">Travel Agency</span> is an
+            unforgettable experience.
+          </p>
+          <p className="about-text">
+            So why wait? Start planning your next adventure today and let us
+            take you on the trip of a lifetime!
+          </p>
+        </div>
       </div>
       <section className="image-section">
         <h2>Our Best Locations</h2>
@@ -48,7 +50,6 @@ const About = () => {
           <div className="image-card">
             <img src="/images/london.jpg" alt="Partner 3" />
           </div>
-          {/* Add more image cards as needed */}
         </div>
       </section>
       <footer className="contact-info">

@@ -1,10 +1,10 @@
 import React from "react";
 import Link from "next/link";
-import { TravelDestination } from "@prisma/client";
+import { TravelListing } from "@prisma/client";
 import "@/styles/travel.css";
 
 interface Props {
-  trips: TravelDestination[];
+  trips: TravelListing[];
 }
 
 const DataTable = ({ trips }: Props) => {
@@ -17,6 +17,8 @@ const DataTable = ({ trips }: Props) => {
             <th className="travel-highlight">ID</th>
             <th className="travel-highlight">Name</th>
             <th className="travel-highlight">Description</th>
+            <th className="travel-highlight">Price</th>
+            <th className="travel-highlight">Date</th>
             <th className="travel-highlight">Actions</th>
           </tr>
         </thead>
@@ -27,12 +29,14 @@ const DataTable = ({ trips }: Props) => {
                   <td className="travel-text">{trip.id}</td>
                   <td className="travel-text">{trip.name}</td>
                   <td className="travel-text">{trip.description}</td>
+                  <td className="travel-text">{trip.price}€</td>
+                  <td className="travel-text">{trip.date.toLocaleString()}</td>
                   <td>
                     <Link
                       className="travel-highlight"
                       href={`/travel/${trip.id}`}
                     >
-                      Show Listings
+                      Show More
                     </Link>
                   </td>
                 </tr>

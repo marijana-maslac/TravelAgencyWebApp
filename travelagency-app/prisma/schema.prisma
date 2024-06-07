@@ -1,5 +1,3 @@
-
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,12 +8,12 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @default("")
-  email     String   @default("")
-  password  String
-  role      UserRole @default(USER)
-  createdAt DateTime @default(now())
+  id           Int           @id @default(autoincrement())
+  username     String        @default("")
+  email        String        @default("")
+  password     String
+  role         UserRole      @default(USER)
+  createdAt    DateTime      @default(now())
   reservations Reservation[]
 }
 
@@ -24,30 +22,23 @@ enum UserRole {
   ADMIN
 }
 
-model TravelDestination {
-  id          Int           @id @default(autoincrement())
-  name        String
-  description String?       @db.Text
-  listings    TravelListing[] // Define a one-to-many relationship with TravelListing
-}
-
 model TravelListing {
-  id              Int         @id @default(autoincrement())
-  destinationId   Int         // Foreign key referencing the id of TravelDestination
-  destination     TravelDestination @relation(fields: [destinationId], references: [id])
-  price           Float
-  date            DateTime
-  reservations    Reservation[]
+  id           Int           @id @default(autoincrement())
+  name         String
+  description  String?       @db.Text
+  price        Float
+  date         DateTime
+  reservations Reservation[]
 }
 
 model Reservation {
-  id              Int      @id @default(autoincrement())
+  id              Int               @id @default(autoincrement())
   userId          Int
-  user            User     @relation(fields: [userId], references: [id])
+  user            User              @relation(fields: [userId], references: [id])
   travelListingId Int
-  travelListing   TravelListing   @relation(fields: [travelListingId], references: [id])
+  travelListing   TravelListing     @relation(fields: [travelListingId], references: [id])
   status          ReservationStatus @default(PENDING)
-  createdAt       DateTime @default(now())
+  createdAt       DateTime          @default(now())
 }
 
 enum ReservationStatus {
