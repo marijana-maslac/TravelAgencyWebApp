@@ -3,7 +3,7 @@ import prisma from "../../../prisma/db";
 import DataTable from "./DataTable";
 
 const Travel = async () => {
-  const travel = await prisma.travelDestination.findMany();
+  const travel = await prisma.travelListing.findMany();
   return (
     <div>
       <DataTable trips={travel} />

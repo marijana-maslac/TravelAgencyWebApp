@@ -1,6 +1,6 @@
 .about-container {
-  max-width: 800px;
-  margin: 0 auto;
+  margin-left: 20%;
+  margin-right: 10%;
   padding: 20px;
 }
 
@@ -11,6 +11,9 @@
   color: #333;
 }
 
+.about-column {
+  margin-left: 20px;
+}
 .about-text {
   font-size: 16px;
   line-height: 1.5;
