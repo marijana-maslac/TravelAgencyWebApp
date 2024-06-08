@@ -2,6 +2,7 @@ import { TravelListing } from "@prisma/client";
 import React from "react";
 import "@/styles/travel.css";
 import Link from "next/link";
+import DeleteButton from "./DeleteButton";
 
 interface Props {
   trip: TravelListing;
@@ -18,9 +19,7 @@ const TripDetail = ({ trip }: Props) => {
         <Link href={`/travel/edit/${trip.id}`} className="link-button">
           Edit
         </Link>
-        <Link href={`/travel/delete/${trip.id}`} className="link-button">
-          Delete
-        </Link>
+        <DeleteButton tripId={trip.id} />
       </div>
     </div>
   );
