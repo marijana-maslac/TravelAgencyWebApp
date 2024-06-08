@@ -18,7 +18,6 @@ const DataTable = ({ trips }: Props) => {
             ? trips.map((trip) => (
                 <tr key={trip.id} data-href="/">
                   <td className="travel-text">{trip.name}</td>
-                  <td className="travel-text">{trip.description}</td>
                   <td className="travel-text">{trip.price}€</td>
                   <td className="travel-text">
                     {trip.date.toLocaleDateString()}
