@@ -25,3 +25,45 @@
   color: #ff9900;
   font-weight: bold;
 }
+
+.card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px 0;
+  max-width: 600px;
+  background-color: #fff;
+  margin-left: 20%;
+  margin-right: 10%;
+}
+
+.cardHeader {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.cardDescription {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  color: #666;
+}
+
+.cardPrice {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #ff9900;
+}
+
+.cardDate {
+  font-size: 14px;
+  color: #999;
+}
+
+.button-style {
+  margin: 10px;
+}
