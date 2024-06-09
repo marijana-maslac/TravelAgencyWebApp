@@ -1,16 +1,28 @@
 import React from "react";
 import styles from "@/app/page.module.css";
 import Link from "next/link";
+import DataTable from "./travel/DataTable";
+import { TravelListing } from "@prisma/client";
 
 interface FlexItemProps {
   title: string;
 }
-
-const page = () => {
+interface Props {
+  trips: TravelListing[];
+}
+const Page = () => {
   return (
     <div>
       <main className={styles.main}>
-        <h1>Dobro došli na početnu stranicu.</h1>
+        <section className={styles.heroSection}>
+          <div className={styles.heroOverlay}>
+            <h1>Explore the World with Us</h1>
+            <p>Your adventure begins here</p>
+            <Link className={styles.ctaButton} href={`/travel`}>
+              Start Your Journey
+            </Link>
+          </div>
+        </section>
         <div className={styles.flexContainer}>
           <FlexItem title="About" />
           <FlexItem title="Travel" />
@@ -29,24 +41,13 @@ const FlexItem: React.FC<FlexItemProps> = ({ title }) => {
       content = (
         <>
           <h2>{title}</h2>
-          <div className={styles.imageGallery}>
-            <img src="/path/to/travel-image1.jpg" alt="Travel Image 1" />
-            <img src="/path/to/travel-image2.jpg" alt="Travel Image 2" />
-            <img src="/path/to/travel-image3.jpg" alt="Travel Image 3" />
-            {/* Add more images specific to Travel */}
+          <div>
+            <DataTable trips={[]} />
           </div>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquet
-            nulla quis massa ultricies, in cursus neque eleifend. Integer
-            ullamcorper erat id orci scelerisque, nec interdum felis faucibus.
-            Phasellus tincidunt, leo nec sodales tincidunt, lorem arcu elementum
-            ex, eget egestas magna eros at urna.
-          </p>
           <div className={styles.linkContainer}>
             <Link href={`/${title.toLowerCase()}`}>
               <p>Read more</p>
             </Link>
-            {/* Add more links specific to Travel */}
           </div>
         </>
       );
@@ -54,10 +55,16 @@ const FlexItem: React.FC<FlexItemProps> = ({ title }) => {
     case "Gallery":
       content = (
         <>
-          <div>
-            <h2>I will put some images from travel adventures here.</h2>
+          <h2>{title}</h2>
+          <div className={styles.imageGallery}>
+            <img src="/images/paris.jpg" alt="Gallery Image 1" />
+            <img src="/images/london.jpg" alt="Gallery Image 2" />
+            <img src="/images/rome.jpeg" alt="Gallery Image 3" />
+            <img src="/images/newyork.jpg" alt="Gallery Image 4" />
+            <img src="/images/trogir.jpg" alt="Gallery Image 5" />
+            <img src="/images/venice.jpg" alt="Gallery Image 6" />
+            <img src="/images/amsterdam.jpg" alt="Gallery Image 7" />
           </div>
-          {/* Content specific to Gallery */}
         </>
       );
       break;
@@ -77,7 +84,11 @@ const FlexItem: React.FC<FlexItemProps> = ({ title }) => {
               take you on the trip of a lifetime!
             </p>
           </div>
-          {/* Content specific to About */}
+          <div className={styles.linkContainer}>
+            <Link href={`/${title.toLowerCase()}`}>
+              <p>Read more</p>
+            </Link>
+          </div>
         </>
       );
       break;
@@ -93,7 +104,6 @@ const FlexItem: React.FC<FlexItemProps> = ({ title }) => {
         </>
       );
       break;
-    // Add more cases for additional FlexItems if needed
     default:
       content = <p>No content available for {title}</p>;
   }
@@ -101,4 +111,4 @@ const FlexItem: React.FC<FlexItemProps> = ({ title }) => {
   return <div className={styles.flexItem}>{content}</div>;
 };
 
-export default page;
+export default Page;
