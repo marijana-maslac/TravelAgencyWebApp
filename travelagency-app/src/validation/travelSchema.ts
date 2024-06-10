@@ -19,4 +19,5 @@ export const travelSchema = z.object({
     .refine((val) => new Date(val) > new Date(), {
       message: "Date must be in the future.",
     }),
+  category: z.string().min(1, { message: "Category is required" }),
 });

@@ -1,27 +1,104 @@
+:root {
+  --primary-color: #ff9900;
+  --secondary-color: #ffffff;
+  --background-color: #f4f4f9;
+  --border-color: #e0e0e0;
+  --text-color: #333;
+  --error-color: #ff4d4d;
+  --highlight-color: #ff9900;
+  --border-radius: 8px;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
 .form-container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  padding-right: 30px;
-  border: 2px solid #ccc;
-  border-radius: 10px; /* Add border radius for rounded corners */
-  background-color: #f9f9f9;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--secondary-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form-label {
-  margin-bottom: 8px;
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: 14px;
 }
 
-.form-input {
+.form-input,
+.form-select {
   width: 100%;
   padding: 8px;
   margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--secondary-color);
+  font-size: 14px;
+  color: var(--text-color);
+  transition: border-color 0.3s;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--highlight-color);
+  outline: none;
+}
+
+.form-button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--highlight-color);
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-button:disabled {
+  background-color: #ffc14d;
+  cursor: not-allowed;
+}
+
+.form-button:not(:disabled):hover {
+  background-color: #e68a00;
 }
 
 .error-message {
-  color: #ff0000;
-  font-size: 14px;
-  margin-bottom: 20px;
+  color: var(--error-color);
+  font-size: 12px; /* Smaller font size */
+  margin-bottom: 10px;
+}
+
+a {
+  color: inherit;
+}
+
+.link-button {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--highlight-color);
+  padding: 5px 10px;
+  border: 2px solid var(--highlight-color);
+  border-radius: 5px;
+  font-size: 12px; /* Smaller font size */
+  text-decoration: none;
+  cursor: pointer;
+  margin: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.link-button:hover {
+  background-color: var(--highlight-color);
+  color: var(--secondary-color);
 }

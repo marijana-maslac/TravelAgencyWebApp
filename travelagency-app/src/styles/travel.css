@@ -10,8 +10,21 @@
   margin-bottom: 20px;
   color: #333;
 }
+
 .travel-table {
-  margin-left: 10px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.travel-table tr {
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 50%;
+}
+
+.travel-table td {
+  padding: 12px;
+  text-align: left;
 }
 
 .travel-text {

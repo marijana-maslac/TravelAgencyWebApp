@@ -14,7 +14,14 @@ const TravelForm = () => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
-
+  const categories = [
+    "Europe",
+    "Asia",
+    "Africa",
+    "NorthAmerica",
+    "SouthAmerica",
+    "Australia",
+  ];
   const {
     register,
     handleSubmit,
@@ -64,6 +71,19 @@ const TravelForm = () => {
         {errors.description && (
           <div className="error-message">Enter description</div>
         )}
+        <label className="form-label">Category</label>
+        <select className="form-select" {...register("category")}>
+          <option value="">Select a category</option>
+          {categories.map((category, index) => (
+            <option key={index} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+        {errors.category && (
+          <div className="error-message">Select a category</div>
+        )}
+
         <label className="form-label">Price</label>
         <input
           className="form-input"
@@ -75,7 +95,7 @@ const TravelForm = () => {
         <input className="form-input" {...register("date")} type="date" />
         {errors.date && <div className="error-message">Enter date</div>}
 
-        <button className="link-button" type="submit" disabled={isSubmitting}>
+        <button className="form-button" type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Submit"}
         </button>
         {serverError && <div className="error-message">{serverError}</div>}
