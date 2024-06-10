@@ -15,6 +15,7 @@ const MainNav = () => {
         <Link href="/about">ABOUT</Link>
         <Link href="/search">SEARCH</Link>
         <Link href="/">LOGOUT</Link>
+        <Link href="/users">Register</Link>
       </nav>
     </div>
   );
