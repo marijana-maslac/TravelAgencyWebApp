@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(validation.error.format(), { status: 400 });
     }
 
-    const { name, description, price, date } = body;
+    const { name, description, price, date, category } = body;
 
     const formattedDate = new Date(date);
 
@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
         description,
         price,
         date: formattedDate,
+        category,
       },
     });
 
