@@ -13,7 +13,8 @@ const MainNav = () => {
         <Link href="/">HOME</Link>
         <Link href="/travel">TRAVEL</Link>
         <Link href="/about">ABOUT</Link>
-        <Link href="/search">SEARCH</Link>
+        <Link href="/users">USERS</Link>
+        <Link href="/users/addUser">Register</Link>
       </nav>
       <div className="nav-button">
         <Link href="/users">Log in</Link>
