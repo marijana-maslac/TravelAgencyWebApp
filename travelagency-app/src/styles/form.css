@@ -76,7 +76,7 @@ body {
 
 .error-message {
   color: var(--error-color);
-  font-size: 12px; /* Smaller font size */
+  font-size: 12px;
   margin-bottom: 10px;
 }
 
@@ -91,7 +91,7 @@ a {
   padding: 5px 10px;
   border: 2px solid var(--highlight-color);
   border-radius: 5px;
-  font-size: 12px; /* Smaller font size */
+  font-size: 12px;
   text-decoration: none;
   cursor: pointer;
   margin: 5px;

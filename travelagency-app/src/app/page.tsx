@@ -17,8 +17,8 @@ const Page = () => {
   return (
     <div>
       <main className={styles.main}>
-        <section className={styles.heroSection}>
-          <div className={styles.heroOverlay}>
+        <section className={styles.mainSection}>
+          <div className={styles.mainOverlay}>
             <h1>Explore the World with Us</h1>
             <p>Your adventure begins here</p>
             <Link className={styles.ctaButton} href={`/travel`}>
