@@ -31,7 +31,7 @@ const UserForm = () => {
     try {
       await axios.post("/api/users", values);
       router.push("/users");
-      reset();
+      router.refresh();
     } catch (error: any) {
       console.error("Submission error: ", error);
       setServerError(
@@ -63,6 +63,15 @@ const UserForm = () => {
           placeholder="email.."
         />
         {errors.email && <div className="error-message">Enter e-mail</div>}
+        <label className="form-label">Password</label>
+        <input
+          type="password"
+          required
+          className="form-input"
+          {...register("password")}
+          placeholder="Password"
+        />
+        {errors.password && <div className="error-message">Enter password</div>}
         <label className="form-label">Role</label>
         <select className="form-select" {...register("role")}>
           <option value="">Select a role</option>
@@ -75,17 +84,9 @@ const UserForm = () => {
         {errors.role && (
           <div className="error-message">{errors.role.message}</div>
         )}
-        <label className="form-label">Password</label>
-        <input
-          type="password"
-          required
-          className="form-input"
-          {...register("password")}
-          placeholder="Password"
-        />
-        {errors.password && <div className="error-message">Enter password</div>}
+
         <button className="form-button" type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Submitting..." : "Submit"}
+          {isSubmitting ? "Creating account.." : "Create an account"}
         </button>
         {serverError && <div className="error-message">{serverError}</div>}
       </form>

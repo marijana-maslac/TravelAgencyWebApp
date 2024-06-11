@@ -14,9 +14,10 @@ const MainNav = () => {
         <Link href="/travel">TRAVEL</Link>
         <Link href="/about">ABOUT</Link>
         <Link href="/search">SEARCH</Link>
-        <Link href="/">LOGOUT</Link>
-        <Link href="/users">Register</Link>
       </nav>
+      <div className="nav-button">
+        <Link href="/users">Log in</Link>
+      </div>
     </div>
   );
 };

@@ -30,7 +30,8 @@ a {
   transition: all 0.3s ease-in-out;
 }
 
-.navbar a {
+.navbar a,
+.nav-button a {
   color: #5f5b5b;
   text-decoration: none;
   font-size: 16px;
@@ -39,24 +40,34 @@ a {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.navbar a:hover {
+.navbar a:hover,
+.nav-button a:hover {
   background-color: #ff9900;
   color: #fff;
 }
 
 @media (max-width: 768px) {
-  .navbar {
+  .navbar,
+  .nav-button {
     flex-direction: column;
     align-items: center;
     gap: 10px;
   }
 
-  .navbar a {
+  .navbar a,
+  .nav-button a {
     font-size: 18px;
     padding: 10px;
   }
 }
-
+.nav-button {
+  display: flex;
+  flex: 0.5;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.3s ease-in-out;
+}
 .link-button {
   display: inline-block;
   background-color: transparent;
