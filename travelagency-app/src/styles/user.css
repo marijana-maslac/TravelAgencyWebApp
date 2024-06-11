@@ -1,0 +1,40 @@
+.user-container {
+  margin-left: 20%;
+  margin-right: 10%;
+  padding: 20px;
+}
+
+.user-heading {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.user-table {
+  width: 50%;
+  border-collapse: collapse;
+}
+
+.user-table tr {
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 50%;
+}
+
+.user-table td {
+  padding: 12px;
+  text-align: left;
+}
+
+.user-text {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  color: #666;
+}
+
+.user-highlight {
+  color: #ff9900;
+  font-weight: bold;
+}
