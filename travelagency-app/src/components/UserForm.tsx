@@ -19,7 +19,6 @@ const UserForm = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<UserFormData>({
     resolver: zodResolver(userSchema),

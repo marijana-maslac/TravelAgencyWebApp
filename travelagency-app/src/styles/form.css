@@ -83,22 +83,3 @@ body {
 a {
   color: inherit;
 }
-
-.link-button {
-  display: inline-block;
-  background-color: transparent;
-  color: var(--highlight-color);
-  padding: 5px 10px;
-  border: 2px solid var(--highlight-color);
-  border-radius: 5px;
-  font-size: 12px;
-  text-decoration: none;
-  cursor: pointer;
-  margin: 5px;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.link-button:hover {
-  background-color: var(--highlight-color);
-  color: var(--secondary-color);
-}

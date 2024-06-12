@@ -15,7 +15,7 @@ const UserDataTable = ({ users }: Props) => {
         <thead>
           <tr>
             <th className="user-text">Username</th>
-            <th className="user-text">Email</th>
+            <th className="user-text">E-mail</th>
             <th className="user-text">Role</th>
             <th className="user-text">Registered At</th>
           </tr>
@@ -28,7 +28,7 @@ const UserDataTable = ({ users }: Props) => {
                   <td className="user-text">{user.email}</td>
                   <td className="user-text">{user.role}</td>
                   <td className="user-text">
-                    {new Date(user.createdAt).toLocaleString()}
+                    {new Date(user.createdAt).toLocaleString("en-UK")}
                   </td>
                 </tr>
               ))
