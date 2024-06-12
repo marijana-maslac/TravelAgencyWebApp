@@ -28,6 +28,7 @@ model TravelListing {
   description  String?       @db.Text
   price        String
   date         DateTime
+  endDate      DateTime
   category     String        @default("Uncategorized")
   reservations Reservation[]
 }

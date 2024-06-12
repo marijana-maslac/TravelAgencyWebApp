@@ -25,7 +25,6 @@ const TravelForm = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<TravelFormData>({
     resolver: zodResolver(travelSchema),
@@ -37,7 +36,7 @@ const TravelForm = () => {
     try {
       await axios.post("/api/travel", values);
       router.push("/travel");
-      reset();
+      router.refresh();
     } catch (error: any) {
       console.error("Submission error: ", error);
       setServerError(
@@ -94,6 +93,9 @@ const TravelForm = () => {
         <label className="form-label">Date</label>
         <input className="form-input" {...register("date")} type="date" />
         {errors.date && <div className="error-message">Enter date</div>}
+        <label className="form-label">End Date</label>
+        <input className="form-input" {...register("endDate")} type="date" />
+        {errors.endDate && <div className="error-message">Enter end date</div>}
 
         <button className="form-button" type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Submit"}

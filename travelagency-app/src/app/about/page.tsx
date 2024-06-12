@@ -55,8 +55,8 @@ const About = () => {
       <footer className="contact-info">
         <h2>Contact Us</h2>
         <p>Email: info@travelagency.com</p>
-        <p>Phone: 123-456-7890</p>
-        <p>Address: 123 Main Street, Adventure City, AC 12345</p>
+        <p>Phone: 091-456-7890</p>
+        <p>Address: K.A.Stepinca 12, 21220 Trogir, RH</p>
       </footer>
     </div>
   );

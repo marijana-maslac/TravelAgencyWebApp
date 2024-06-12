@@ -19,5 +19,13 @@ export const travelSchema = z.object({
     .refine((val) => new Date(val) > new Date(), {
       message: "Date must be in the future.",
     }),
+  endDate: z
+    .string()
+    .refine((val) => !isNaN(Date.parse(val)), {
+      message: "Invalid date format.",
+    })
+    .refine((val) => new Date(val) > new Date(), {
+      message: "Date must be in the future.",
+    }),
   category: z.string().min(1, { message: "Category is required" }),
 });
