@@ -12,7 +12,15 @@ const DataTable = ({ trips }: Props) => {
     <div>
       <h2 className="travel-heading">Travel Destinations</h2>
       <table className="travel-table">
-        <thead></thead>
+        <thead>
+          <tr>
+            <th>DESTINATION</th>
+            <th>PRICE</th>
+            <th>DEPARTURE</th>
+            <th>RETURN</th>
+            <th>MORE INFO</th>
+          </tr>
+        </thead>
         <tbody>
           {trips
             ? trips.map((trip) => (

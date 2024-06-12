@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../prisma/db";
-import { date } from "zod";
 
 export async function POST(request: NextRequest) {
   try {
