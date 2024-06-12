@@ -41,7 +41,7 @@ const FlexItem: React.FC<FlexItemProps> = ({ title }) => {
   useEffect(() => {
     if (title === "Travel") {
       const fetchTrips = async () => {
-        const response = await fetch(`/api/travel?page=1&limit=7`);
+        const response = await fetch(`/api/travel?page=1&limit=5`);
         const data = await response.json();
         setTrips(data.trips);
       };
