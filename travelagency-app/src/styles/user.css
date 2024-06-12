@@ -24,7 +24,7 @@
 
 .user-table td {
   padding: 12px;
-  text-align: left;
+  text-align: center;
 }
 
 .user-text {
@@ -37,14 +37,4 @@
 .user-highlight {
   color: #ff9900;
   font-weight: bold;
-}
-
-.link-button {
-  display: inline-block;
-  margin-bottom: 20px;
-  padding: 10px 20px;
-  background-color: #ff9900;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
 }
