@@ -20,7 +20,10 @@ const DataTable = ({ trips }: Props) => {
                   <td className="travel-text">{trip.name}</td>
                   <td className="travel-text">{trip.price}€</td>
                   <td className="travel-text">
-                    {trip.date.toLocaleDateString()}
+                    {new Date(trip.date).toLocaleDateString("en-UK")}
+                  </td>
+                  <td className="travel-text">
+                    {new Date(trip.endDate).toLocaleDateString("en-UK")}
                   </td>
                   <td>
                     <Link className="travel-text" href={`/travel/${trip.id}`}>

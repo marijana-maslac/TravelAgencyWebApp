@@ -150,3 +150,25 @@
 .next:hover {
   background-color: rgba(255, 255, 255, 0.688);
 }
+
+.linkContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.viewMoreButton {
+  padding: 10px 20px;
+  background-color: #ff9900;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+}
+
+.viewMoreButton:hover {
+  background-color: #ff9900;
+}

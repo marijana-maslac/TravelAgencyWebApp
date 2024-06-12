@@ -1,16 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/app/page.module.css";
 import Link from "next/link";
 import DataTable from "./travel/DataTable";
-import { TravelListing } from "@prisma/client";
 import "@/styles/about.css";
+
 interface FlexItemProps {
   title: string;
-}
-
-interface Props {
-  trips: TravelListing[];
 }
 
 const Page = () => {
@@ -40,18 +36,31 @@ const Page = () => {
 };
 
 const FlexItem: React.FC<FlexItemProps> = ({ title }) => {
+  const [trips, setTrips] = useState([]);
+
+  useEffect(() => {
+    if (title === "Travel") {
+      const fetchTrips = async () => {
+        const response = await fetch(`/api/travel?page=1&limit=7`);
+        const data = await response.json();
+        setTrips(data.trips);
+      };
+
+      fetchTrips();
+    }
+  }, [title]);
+
   let content;
   switch (title) {
     case "Travel":
       content = (
         <>
-          <h2>{title}</h2>
           <div>
-            <DataTable trips={[]} />
+            <DataTable trips={trips} />
           </div>
           <div className={styles.linkContainer}>
-            <Link href={`/${title.toLowerCase()}`}>
-              <p>Read more</p>
+            <Link className="viewMoreButton" href="/travel">
+              View More
             </Link>
           </div>
         </>
@@ -77,7 +86,6 @@ const FlexItem: React.FC<FlexItemProps> = ({ title }) => {
               relaxing beach getaway, an exciting adventure tour, or a cultural
               immersion in a far-off land, we've got you covered.
             </p>
-
             <p className="about-text">
               We believe that travel has the power to enrich lives, create
               memories, and foster connections with people and places around the
@@ -106,8 +114,8 @@ const FlexItem: React.FC<FlexItemProps> = ({ title }) => {
           <h2>{title}</h2>
           <div>
             <p>Email: info@travelagency.com</p>
-            <p>Phone: 123-456-7890</p>
-            <p>Address: 123 Main Street, Adventure City, AC 12345</p>
+            <p>Phone: 091-456-7890</p>
+            <p>Address: K.A.Stepinca 12, 21220 Trogir, RH</p>
           </div>
         </>
       );

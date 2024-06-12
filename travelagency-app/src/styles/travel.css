@@ -39,6 +39,14 @@
   font-weight: bold;
 }
 
+tbody a {
+  color: #666;
+  text-decoration: none;
+}
+tbody a:hover {
+  color: #ff9900;
+  text-decoration: underline;
+}
 .card {
   border: 1px solid #e0e0e0;
   border-radius: 8px;
@@ -77,6 +85,24 @@
   color: #999;
 }
 
-.button-style {
-  margin: 10px;
+.btn-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.btn-buttons button {
+  background-color: #ff9900;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-buttons button:hover {
+  background-color: #e6830c;
 }
