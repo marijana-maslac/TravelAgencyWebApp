@@ -49,3 +49,24 @@ export async function PATCH(request: NextRequest, { params }: Props) {
   });
   return NextResponse.json(updateUser);
 }
+
+export async function DELETE(request: NextRequest, { params }: Props) {
+  const userId = parseInt(params.id, 10);
+  if (isNaN(userId)) {
+    return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!user) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  }
+
+  await prisma.user.delete({
+    where: { id: user.id },
+  });
+
+  return NextResponse.json({ message: "User deleted." });
+}

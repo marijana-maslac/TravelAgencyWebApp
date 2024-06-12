@@ -30,6 +30,11 @@ const UserDataTable = ({ users }: Props) => {
                   <td className="user-text">
                     {new Date(user.createdAt).toLocaleString("en-UK")}
                   </td>
+                  <td>
+                    <Link className="user-text" href={`/users/${user.id}`}>
+                      Read More
+                    </Link>
+                  </td>
                 </tr>
               ))
             : null}
