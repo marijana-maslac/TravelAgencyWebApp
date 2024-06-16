@@ -5,7 +5,6 @@ import options from "@/app/api/auth/[...nextauth]/options";
 
 const MainNav = async () => {
   const session = await getServerSession(options);
-  console.log(session);
   return (
     <div className="main-container">
       <div className="logo-container">
