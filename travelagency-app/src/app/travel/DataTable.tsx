@@ -6,7 +6,6 @@ import "@/styles/travel.css";
 interface Props {
   trips: TravelListing[];
 }
-
 const DataTable = ({ trips }: Props) => {
   return (
     <div>
