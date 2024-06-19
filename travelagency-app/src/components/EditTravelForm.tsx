@@ -28,7 +28,14 @@ const EditTravelForm = ({ tripId }: EditTravelFormProps) => {
     "SouthAmerica",
     "Australia",
   ];
-
+  const priceCategories = [
+    "0-500",
+    "500-1000",
+    "1000-1500",
+    "1500-2000",
+    "2000-2500",
+    "2500-3000",
+  ];
   const {
     register,
     handleSubmit,
@@ -123,6 +130,19 @@ const EditTravelForm = ({ tripId }: EditTravelFormProps) => {
           placeholder="Price in €"
         />
         {errors.price && <div className="error-message">Enter price</div>}
+
+        <label className="form-label">Price Category</label>
+        <select className="form-select" {...register("priceCategory")}>
+          <option value="">Select a price category</option>
+          {priceCategories.map((priceCategory, index) => (
+            <option key={index} value={priceCategory}>
+              {priceCategory}
+            </option>
+          ))}
+        </select>
+        {errors.priceCategory && (
+          <div className="error-message">Select a price category</div>
+        )}
         <label className="form-label">Date</label>
         <input className="form-input" {...register("date")} type="date" />
         {errors.date && <div className="error-message">Enter date</div>}

@@ -29,12 +29,19 @@ const categories = [
   { label: "South America", value: "SouthAmerica" },
   { label: "Australia", value: "Australia" },
 ];
+const priceCategories = [
+  { label: "All Categories", value: "" },
+  { label: "0-500", value: "0-500" },
+  { label: "500-1000", value: "500-1000" },
+  { label: "1000-1500", value: "1000-1500" },
+  { label: "1500-2000", value: "1500-2000" },
+  { label: "2000-2500", value: "2000-2500" },
+];
 
 const years = [
   { label: "All Years", value: "" },
   { label: "2024", value: "2024" },
   { label: "2025", value: "2025" },
-  // Add other years as needed
 ];
 
 const Travel = () => {
@@ -44,6 +51,7 @@ const Travel = () => {
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedPriceCategory, setSelectedPriceCategory] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
   const fetchTrips = async (
@@ -51,6 +59,7 @@ const Travel = () => {
     month: string = "",
     year: string = "",
     category: string = "",
+    priceCategory: string = "",
     search: string = ""
   ) => {
     let url = `/api/travel?page=${page}&limit=8`;
@@ -62,6 +71,9 @@ const Travel = () => {
     }
     if (category) {
       url += `&category=${category}`;
+    }
+    if (priceCategory) {
+      url += `&priceCategory=${priceCategory}`;
     }
     if (search) {
       url += `&search=${encodeURIComponent(search)}`;
@@ -85,9 +97,17 @@ const Travel = () => {
       selectedMonth,
       selectedYear,
       selectedCategory,
+      selectedPriceCategory,
       searchTerm
     );
-  }, [currentPage, selectedMonth, selectedYear, selectedCategory, searchTerm]);
+  }, [
+    currentPage,
+    selectedMonth,
+    selectedYear,
+    selectedPriceCategory,
+    selectedCategory,
+    searchTerm,
+  ]);
 
   const nextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
@@ -113,6 +133,12 @@ const Travel = () => {
     setSelectedCategory(event.target.value);
     setCurrentPage(1);
   };
+  const handlePriceCategoryChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSelectedPriceCategory(event.target.value);
+    setCurrentPage(1);
+  };
 
   const handleSearchChange = (search: string) => {
     setSearchTerm(search);
@@ -123,6 +149,7 @@ const Travel = () => {
     setSelectedMonth("");
     setSelectedYear("");
     setSelectedCategory("");
+    setSelectedPriceCategory("");
     setSearchTerm("");
     setCurrentPage(1);
   };
@@ -180,6 +207,20 @@ const Travel = () => {
           {categories.map((category) => (
             <option key={category.value} value={category.value}>
               {category.label}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="filter-container">
+        <label htmlFor="priceCategoryFilter">Filter by Price:</label>
+        <select
+          id="priceCtegoryFilter"
+          value={selectedCategory}
+          onChange={handlePriceCategoryChange}
+        >
+          {priceCategories.map((priceCategory) => (
+            <option key={priceCategory.value} value={priceCategory.value}>
+              {priceCategory.label}
             </option>
           ))}
         </select>

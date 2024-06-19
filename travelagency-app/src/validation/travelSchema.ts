@@ -28,4 +28,5 @@ export const travelSchema = z.object({
       message: "Date must be in the future.",
     }),
   category: z.string().min(1, { message: "Category is required" }),
+  priceCategory: z.string().min(1, { message: "Category is required" }),
 });
