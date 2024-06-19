@@ -7,7 +7,8 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    const { name, description, price, date, endDate, category } = body;
+    const { name, description, price, date, endDate, category, priceCategory } =
+      body;
 
     const formattedDate = new Date(date);
     const formattedEndDate = new Date(endDate);
@@ -20,6 +21,7 @@ export async function POST(request: NextRequest) {
         date: formattedDate,
         endDate: formattedEndDate,
         category,
+        priceCategory,
       },
     });
 
@@ -36,6 +38,7 @@ export async function GET(request: NextRequest) {
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "5");
     const category = searchParams.get("category") || "";
+    const priceCategory = searchParams.get("priceCategory") || "";
     const month = searchParams.get("month") || "";
     const year = searchParams.get("year") || "";
 
@@ -46,6 +49,11 @@ export async function GET(request: NextRequest) {
     if (category) {
       where.category = {
         equals: category,
+      };
+    }
+    if (priceCategory) {
+      where.priceCategory = {
+        equals: priceCategory,
       };
     }
 
@@ -69,7 +77,6 @@ export async function GET(request: NextRequest) {
     } else if (month && !year) {
       const parsedMonth = parseInt(month, 10);
       if (!isNaN(parsedMonth) && parsedMonth >= 1 && parsedMonth <= 12) {
-        // Postavljanje datuma za filtriranje samo po mjesecu
         const today = new Date();
         const startDate = new Date(today.getFullYear(), parsedMonth - 1, 1);
         const endDate = new Date(today.getFullYear(), parsedMonth, 0);
@@ -80,11 +87,10 @@ export async function GET(request: NextRequest) {
         };
       }
     } else if (!month && year) {
-      // Filtriranje samo po godini
       const parsedYear = parseInt(year, 10);
       if (!isNaN(parsedYear)) {
-        const startDate = new Date(parsedYear, 0, 1); // 1. siječnja odabrane godine
-        const endDate = new Date(parsedYear, 11, 31); // 31. prosinca odabrane godine
+        const startDate = new Date(parsedYear, 0, 1);
+        const endDate = new Date(parsedYear, 11, 31);
 
         where.date = {
           gte: startDate,
@@ -93,10 +99,9 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // Ako nisu odabrani ni mjesec ni godina, prikaži sve putovanja od danas
     if (!month && !year) {
       where.date = {
-        gte: new Date(), // Filtriraj putovanja koja su od danas
+        gte: new Date(),
       };
     }
 

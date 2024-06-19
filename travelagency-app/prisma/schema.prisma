@@ -23,14 +23,15 @@ enum UserRole {
 }
 
 model TravelListing {
-  id           Int           @id @default(autoincrement())
-  name         String
-  description  String?       @db.Text
-  price        String
-  date         DateTime
-  endDate      DateTime
-  category     String        @default("Uncategorized")
-  reservations Reservation[]
+  id            Int           @id @default(autoincrement())
+  name          String
+  description   String?       @db.Text
+  price         String
+  date          DateTime
+  endDate       DateTime
+  category      String        @default("Uncategorized")
+  priceCategory String        @default("Uncategorized")
+  reservations  Reservation[]
 }
 
 model Reservation {
