@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Reservation } from "@prisma/client";
+import DeleteButton from "./[id]/DeleteButton";
 
 interface Props {
   reservations: Reservation[];
@@ -36,6 +37,7 @@ const ReservationDataTable: React.FC<Props> = ({ reservations }) => {
                 >
                   Edit
                 </Link>
+                <DeleteButton reservationId={reservation.id} />
               </td>
             </tr>
           ))}

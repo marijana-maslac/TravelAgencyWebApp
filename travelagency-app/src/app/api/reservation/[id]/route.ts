@@ -1,5 +1,3 @@
-// pages/api/reservations/[id].ts
-
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../../prisma/db";
 
@@ -64,4 +62,28 @@ export async function PUT(request: NextRequest, { params }: Props) {
     console.error("Server error: ", error);
     return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
+}
+
+export async function DELETE(request: NextRequest, { params }: Props) {
+  const reservationId = parseInt(params.id, 10);
+  if (isNaN(reservationId)) {
+    return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
+  }
+
+  const reservation = await prisma.reservation.findUnique({
+    where: { id: reservationId },
+  });
+
+  if (!reservation) {
+    return NextResponse.json(
+      { error: "Reservation not found" },
+      { status: 404 }
+    );
+  }
+
+  await prisma.reservation.delete({
+    where: { id: reservation.id },
+  });
+
+  return NextResponse.json({ message: "Reservation deleted." });
 }
