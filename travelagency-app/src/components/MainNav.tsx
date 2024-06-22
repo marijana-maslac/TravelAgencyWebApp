@@ -19,6 +19,7 @@ const MainNav = async () => {
         <Link href="/travel">TRAVEL</Link>
         <Link href="/about">ABOUT</Link>
         <Link href="/users">USERS</Link>
+        <Link href="/reservations">RESERVATIONS</Link>
       </nav>
       <div className="nav-button">
         {session ? (

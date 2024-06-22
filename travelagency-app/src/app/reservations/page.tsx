@@ -1,12 +1,15 @@
 import React from "react";
+import prisma from "../../../prisma/db";
+import ReservationTable from "./ReservationTable";
 
-const ConfirmationPage = () => {
+const Reservations = async () => {
+  const reservations = await prisma.reservation.findMany();
+
   return (
     <div>
-      <h1>Reservation Successful!</h1>
-      <p>Your reservation has been made successfully.</p>
+      <ReservationTable reservations={reservations} />
     </div>
   );
 };
 
-export default ConfirmationPage;
+export default Reservations;
