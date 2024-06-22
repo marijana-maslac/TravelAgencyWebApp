@@ -1,9 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Prisma, PrismaClient } from "@prisma/client";
+import { getServerSession } from "next-auth";
+import options from "../auth/[...nextauth]/options";
 
 const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
+  const session = await getServerSession(options);
+
+  if (!session) {
+    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+  }
+
   try {
     const body = await request.json();
 
