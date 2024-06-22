@@ -24,6 +24,9 @@ const TripDetail = ({ trip }: Props) => {
         <Link href={`/travel/edit/${trip.id}`} className="link-button">
           Edit
         </Link>
+        <Link href={`../reservations/${trip.id}`} className="link-button">
+          Reservate
+        </Link>
         <DeleteButton tripId={trip.id} />
       </div>
     </div>
