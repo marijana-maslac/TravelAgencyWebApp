@@ -1,10 +1,9 @@
-// SearchBar.tsx
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface SearchBarProps {
-  onSearch: (search: string) => void; // Define prop type for onSearch
+  onSearch: (search: string) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
@@ -12,17 +11,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const handleSearch = () => {
-    onSearch(searchTerm); // Call the onSearch callback provided by parent
+    onSearch(searchTerm);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
-  };
-
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      handleSearch();
-    }
   };
 
   return (
@@ -32,7 +25,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         placeholder="Search trips by name..."
         value={searchTerm}
         onChange={handleInputChange}
-        onKeyPress={handleKeyPress}
       />
       <button onClick={handleSearch}>Search</button>
     </div>

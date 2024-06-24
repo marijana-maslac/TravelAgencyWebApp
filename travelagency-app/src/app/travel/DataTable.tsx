@@ -2,6 +2,8 @@ import React from "react";
 import Link from "next/link";
 import { TravelListing } from "@prisma/client";
 import "@/styles/travel.css";
+import { getServerSession } from "next-auth";
+import options from "@/app/api/auth/[...nextauth]/options";
 
 interface Props {
   trips: TravelListing[];

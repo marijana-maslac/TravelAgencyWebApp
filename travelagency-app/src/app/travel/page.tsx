@@ -6,18 +6,18 @@ import SearchBar from "./SearchBar";
 
 const months = [
   { label: "All Months", value: "" },
-  { label: "January", value: "1" },
-  { label: "February", value: "2" },
-  { label: "March", value: "3" },
-  { label: "April", value: "4" },
-  { label: "May", value: "5" },
-  { label: "June", value: "6" },
-  { label: "July", value: "7" },
-  { label: "August", value: "8" },
-  { label: "September", value: "9" },
-  { label: "October", value: "10" },
-  { label: "November", value: "11" },
-  { label: "December", value: "12" },
+  { label: "January", value: 1 },
+  { label: "February", value: 2 },
+  { label: "March", value: 3 },
+  { label: "April", value: 4 },
+  { label: "May", value: 5 },
+  { label: "June", value: 6 },
+  { label: "July", value: 7 },
+  { label: "August", value: 8 },
+  { label: "September", value: 9 },
+  { label: "October", value: 10 },
+  { label: "November", value: 11 },
+  { label: "December", value: 12 },
 ];
 
 const categories = [
@@ -29,6 +29,7 @@ const categories = [
   { label: "South America", value: "SouthAmerica" },
   { label: "Australia", value: "Australia" },
 ];
+
 const priceCategories = [
   { label: "All Categories", value: "" },
   { label: "0-500", value: "0-500" },
@@ -40,44 +41,50 @@ const priceCategories = [
 
 const years = [
   { label: "All Years", value: "" },
-  { label: "2024", value: "2024" },
-  { label: "2025", value: "2025" },
+  { label: "2024", value: 2024 },
+  { label: "2025", value: 2025 },
 ];
 
 const Travel = () => {
   const [trips, setTrips] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [selectedMonth, setSelectedMonth] = useState("");
-  const [selectedYear, setSelectedYear] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState<number | "">(0);
+  const [selectedYear, setSelectedYear] = useState<number | "">(0);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedPriceCategory, setSelectedPriceCategory] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const fetchTrips = async (
-    page: number,
-    month: string = "",
-    year: string = "",
-    category: string = "",
-    priceCategory: string = "",
-    search: string = ""
-  ) => {
-    let url = `/api/travel?page=${page}&limit=8`;
-    if (month) {
-      url += `&month=${month}`;
+  useEffect(() => {
+    fetchTrips();
+  }, [
+    selectedMonth,
+    selectedYear,
+    selectedCategory,
+    selectedPriceCategory,
+    searchTerm,
+    currentPage,
+  ]);
+
+  const fetchTrips = async () => {
+    let url = `/api/travel?page=${currentPage}&limit=8`;
+
+    if (selectedMonth !== "") {
+      url += `&month=${selectedMonth}`;
     }
-    if (year) {
-      url += `&year=${year}`;
+    if (selectedYear !== "") {
+      url += `&year=${selectedYear}`;
     }
-    if (category) {
-      url += `&category=${category}`;
+    if (selectedCategory !== "") {
+      url += `&category=${selectedCategory}`;
     }
-    if (priceCategory) {
-      url += `&priceCategory=${priceCategory}`;
+    if (selectedPriceCategory !== "") {
+      url += `&priceCategory=${selectedPriceCategory}`;
     }
-    if (search) {
-      url += `&search=${encodeURIComponent(search)}`;
+    if (searchTerm !== "") {
+      url += `&search=${encodeURIComponent(searchTerm)}`;
     }
+
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -91,58 +98,28 @@ const Travel = () => {
     }
   };
 
-  useEffect(() => {
-    fetchTrips(
-      currentPage,
-      selectedMonth,
-      selectedYear,
-      selectedCategory,
-      selectedPriceCategory,
-      searchTerm
-    );
-  }, [
-    currentPage,
-    selectedMonth,
-    selectedYear,
-    selectedPriceCategory,
-    selectedCategory,
-    searchTerm,
-  ]);
-
-  const nextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-  };
-
-  const prevPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-  };
-
   const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedMonth(event.target.value);
-    setCurrentPage(1);
+    setSelectedMonth(parseInt(event.target.value));
   };
 
   const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedYear(event.target.value);
-    setCurrentPage(1);
+    setSelectedYear(parseInt(event.target.value));
   };
 
   const handleCategoryChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setSelectedCategory(event.target.value);
-    setCurrentPage(1);
   };
+
   const handlePriceCategoryChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setSelectedPriceCategory(event.target.value);
-    setCurrentPage(1);
   };
 
   const handleSearchChange = (search: string) => {
     setSearchTerm(search);
-    setCurrentPage(1);
   };
 
   const handleResetFilters = () => {
@@ -151,7 +128,6 @@ const Travel = () => {
     setSelectedCategory("");
     setSelectedPriceCategory("");
     setSearchTerm("");
-    setCurrentPage(1);
   };
 
   const search = (items: any[]) => {
@@ -161,6 +137,10 @@ const Travel = () => {
       }
       return false;
     });
+  };
+
+  const goToPage = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -173,11 +153,11 @@ const Travel = () => {
         <label htmlFor="monthFilter">Filter by Month:</label>
         <select
           id="monthFilter"
-          value={selectedMonth}
+          value={selectedMonth === "" ? "" : selectedMonth.toString()}
           onChange={handleMonthChange}
         >
           {months.map((month) => (
-            <option key={month.value} value={month.value}>
+            <option key={month.value} value={month.value.toString()}>
               {month.label}
             </option>
           ))}
@@ -187,11 +167,11 @@ const Travel = () => {
         <label htmlFor="yearFilter">Filter by Year:</label>
         <select
           id="yearFilter"
-          value={selectedYear}
+          value={selectedYear === "" ? "" : selectedYear.toString()}
           onChange={handleYearChange}
         >
           {years.map((year) => (
-            <option key={year.value} value={year.value}>
+            <option key={year.value} value={year.value.toString()}>
               {year.label}
             </option>
           ))}
@@ -214,8 +194,8 @@ const Travel = () => {
       <div className="filter-container">
         <label htmlFor="priceCategoryFilter">Filter by Price:</label>
         <select
-          id="priceCtegoryFilter"
-          value={selectedCategory}
+          id="priceCategoryFilter"
+          value={selectedPriceCategory}
           onChange={handlePriceCategoryChange}
         >
           {priceCategories.map((priceCategory) => (
@@ -227,14 +207,12 @@ const Travel = () => {
       </div>
       <button onClick={handleResetFilters}>Reset Filters</button>
       <DataTable trips={search(trips)} />
-      <div className="btn-buttons">
-        <button onClick={prevPage} disabled={currentPage === 1}>
-          Previous
-        </button>
-        <span>{`Page ${currentPage} of ${totalPages}`}</span>
-        <button onClick={nextPage} disabled={currentPage === totalPages}>
-          Next
-        </button>
+      <div>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button key={index} onClick={() => goToPage(index + 1)}>
+            {index + 1}
+          </button>
+        ))}
       </div>
     </div>
   );
