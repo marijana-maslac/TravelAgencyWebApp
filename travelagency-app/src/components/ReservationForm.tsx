@@ -1,30 +1,41 @@
 "use client";
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import { TravelListing, User } from "@prisma/client";
+import React, { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 
-interface Props {
+interface TravelListing {
+  id: number;
+  name: string;
+  description: string | null;
+  price: string;
+  date: Date;
+  endDate: Date;
+  category: string;
+  priceCategory: string;
+}
+
+interface ReservationFormProps {
   trip: TravelListing;
 }
 
-const ReservationForm = ({ trip }: Props) => {
+const ReservationPage: React.FC<ReservationFormProps> = ({ trip }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId") || "";
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await axios.post("/api/reservation", {
-        userId: 2,
+        userId: parseInt(userId, 10),
         travelListingId: trip.id,
       });
       router.push("/reservations");
       router.refresh();
     } catch (error: any) {
       console.error("Submission error: ", error);
-      setError(error.response?.data?.message || "Unknown Error ");
-    } finally {
+      setError(error.response?.data?.message || "Unknown Error");
     }
   };
 
@@ -43,4 +54,4 @@ const ReservationForm = ({ trip }: Props) => {
   );
 };
 
-export default ReservationForm;
+export default ReservationPage;
