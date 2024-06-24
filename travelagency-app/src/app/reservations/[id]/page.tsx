@@ -36,9 +36,7 @@ const ViewTravel = async ({ params }: Props) => {
   if (!trip) {
     return <p>Trip not found</p>;
   }
-  if (session?.user.role == "USER") {
-    return <p>You made a reservation</p>;
-  }
+
   return <ReservationForm trip={trip} />;
 };
 
