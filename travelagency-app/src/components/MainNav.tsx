@@ -25,7 +25,10 @@ const MainNav = async () => {
           </>
         ) : null}
         {session?.user.role == "USER" ? (
-          <Link href="/history">History</Link>
+          <>
+            <Link href="/myBooking">My Booking</Link>
+            <Link href="/history">History</Link>
+          </>
         ) : null}
       </nav>
       <div className="nav-button">
@@ -36,7 +39,7 @@ const MainNav = async () => {
           </>
         ) : (
           <>
-            <Link href="/users/addUser">Sign Up</Link>
+            <Link href="/registration">Sign Up</Link>
             <Link href="/api/auth/signin">Sign In</Link>
           </>
         )}

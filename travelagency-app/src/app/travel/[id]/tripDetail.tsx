@@ -5,6 +5,7 @@ import Link from "next/link";
 import DeleteButton from "./DeleteButton";
 import { getServerSession } from "next-auth";
 import options from "@/app/api/auth/[...nextauth]/options";
+import prisma from "../../../../prisma/db";
 
 interface Props {
   trip: TravelListing;
@@ -12,6 +13,15 @@ interface Props {
 
 const TripDetail = async ({ trip }: Props) => {
   const session = await getServerSession(options);
+  const userEmail = session?.user.email;
+
+  const user = await prisma.user.findFirst({
+    where: { email: userEmail },
+    select: { id: true },
+  });
+
+  const userID = user?.id || 1;
+  console.log(userID);
 
   return (
     <div className="card">
@@ -34,9 +44,14 @@ const TripDetail = async ({ trip }: Props) => {
           </>
         ) : null}
         {session?.user.role != "ADMIN" ? (
-          <Link href={`../reservations/${trip.id}`} className="link-button">
-            Book a trip
-          </Link>
+          <>
+            <Link
+              href={`/reservations/${trip.id}?userId=${userID}`}
+              className="link-button"
+            >
+              Book a trip
+            </Link>
+          </>
         ) : null}
       </div>
     </div>

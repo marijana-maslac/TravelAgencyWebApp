@@ -3,7 +3,9 @@ import prisma from "../../../prisma/db";
 import ReservationTable from "./ReservationTable";
 
 const Reservations = async () => {
-  const reservations = await prisma.reservation.findMany();
+  const reservations = await prisma.reservation.findMany({
+    include: { user: true, travelListing: true },
+  });
 
   return (
     <div>
