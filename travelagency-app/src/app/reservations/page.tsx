@@ -1,6 +1,6 @@
 import React from "react";
 import prisma from "../../../prisma/db";
-import ReservationTable from "./ReservationTable";
+import ReservationDataTable from "./ReservationTable";
 
 const Reservations = async () => {
   const reservations = await prisma.reservation.findMany({
@@ -9,7 +9,7 @@ const Reservations = async () => {
 
   return (
     <div>
-      <ReservationTable reservations={reservations} />
+      <ReservationDataTable reservations={reservations} />
     </div>
   );
 };
