@@ -2,17 +2,29 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../prisma/db";
 
 export async function POST(request: NextRequest) {
+  const body = await request.json();
+  const { userId, travelListingId, ...requestData } = body;
   try {
-    const body = await request.json();
-    const { userId, travelListingId } = body;
-
-    const newReservation = await prisma.reservation.create({
-      data: {
-        userId,
-        travelListingId,
+    const reservationExist = await prisma.reservation.findFirst({
+      where: {
+        travelListingId: travelListingId,
+        userId: userId,
       },
     });
-    return NextResponse.json(newReservation, { status: 201 });
+    if (!reservationExist) {
+      const newReservation = await prisma.reservation.create({
+        data: {
+          userId,
+          travelListingId,
+        },
+      });
+      return NextResponse.json(newReservation, { status: 201 });
+    } else {
+      return NextResponse.json(
+        { message: "Reservation request for this trip already exists" },
+        {}
+      );
+    }
   } catch (error) {
     console.error("Server error: ", error);
     return NextResponse.json({ message: "Server error" }, { status: 500 });

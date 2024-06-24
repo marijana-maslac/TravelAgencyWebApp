@@ -3,12 +3,16 @@ import React from "react";
 import "@/styles/travel.css";
 import Link from "next/link";
 import DeleteButton from "./DeleteButton";
+import { getServerSession } from "next-auth";
+import options from "@/app/api/auth/[...nextauth]/options";
 
 interface Props {
   trip: TravelListing;
 }
 
-const TripDetail = ({ trip }: Props) => {
+const TripDetail = async ({ trip }: Props) => {
+  const session = await getServerSession(options);
+
   return (
     <div className="card">
       <p className="cardHeader">{trip.name}</p>
@@ -21,13 +25,19 @@ const TripDetail = ({ trip }: Props) => {
         Return: {trip.endDate.toLocaleDateString("en-UK")}
       </p>
       <div className="button-style">
-        <Link href={`/travel/edit/${trip.id}`} className="link-button">
-          Edit
-        </Link>
-        <Link href={`../reservations/${trip.id}`} className="link-button">
-          Reservate
-        </Link>
-        <DeleteButton tripId={trip.id} />
+        {session?.user.role == "ADMIN" ? (
+          <>
+            <Link href={`/travel/edit/${trip.id}`} className="link-button">
+              Edit
+            </Link>
+            <DeleteButton tripId={trip.id} />
+          </>
+        ) : null}
+        {session?.user.role != "ADMIN" ? (
+          <Link href={`../reservations/${trip.id}`} className="link-button">
+            Book a trip
+          </Link>
+        ) : null}
       </div>
     </div>
   );

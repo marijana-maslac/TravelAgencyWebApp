@@ -18,14 +18,27 @@ const MainNav = async () => {
         <Link href="/">HOME</Link>
         <Link href="/travel">TRAVEL</Link>
         <Link href="/about">ABOUT</Link>
-        <Link href="/users">USERS</Link>
-        <Link href="/reservations">RESERVATIONS</Link>
+        {session?.user.role == "ADMIN" ? (
+          <>
+            <Link href="/users">USERS</Link>
+            <Link href="/reservations">RESERVATIONS</Link>
+          </>
+        ) : null}
+        {session?.user.role == "USER" ? (
+          <Link href="/history">History</Link>
+        ) : null}
       </nav>
       <div className="nav-button">
         {session ? (
-          <Link href="/api/auth/signout?callbackUrl=/">Logout</Link>
+          <>
+            <Link href="/myProfile">My Profile</Link>
+            <Link href="/api/auth/signout?callbackUrl=/">Sign Out</Link>
+          </>
         ) : (
-          <Link href="/api/auth/signin">Login</Link>
+          <>
+            <Link href="/users/addUser">Sign Up</Link>
+            <Link href="/api/auth/signin">Sign In</Link>
+          </>
         )}
       </div>
     </div>

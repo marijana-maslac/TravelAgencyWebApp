@@ -1,9 +1,11 @@
 import { userSchema } from "@/validation/userSchema";
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "../../../../prisma/db";
 import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
 import options from "../auth/[...nextauth]/options";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
   const session = await getServerSession(options);
@@ -43,4 +45,31 @@ export async function POST(request: NextRequest) {
   });
 
   return NextResponse.json(newUser, { status: 201 });
+}
+
+export async function GET(request: NextRequest) {
+  const session = await getServerSession(options); // Await the session here
+
+  if (!session || !session.user) {
+    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+  }
+
+  if (isNaN(session.user.id)) {
+    return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
+  }
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(user, { status: 200 });
+  } catch (error) {
+    console.error("Server error: ", error);
+    return NextResponse.json({ message: "Server error" }, { status: 500 });
+  }
 }

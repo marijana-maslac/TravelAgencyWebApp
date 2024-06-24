@@ -1,6 +1,6 @@
 "use client";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
@@ -8,19 +8,28 @@ type ReservationFormData = {
   status: "PENDING" | "CONFIRMED" | "CANCELLED";
 };
 
+interface TravelListing {
+  date: string;
+}
+
+interface Reservation {
+  id: number;
+  status: "PENDING" | "CONFIRMED" | "CANCELLED";
+  travelListing: TravelListing;
+}
+
 interface EditReservationFormProps {
   reservationId: number;
 }
 
-const EditReservationForm = ({ reservationId }: EditReservationFormProps) => {
+const EditReservationForm: React.FC<EditReservationFormProps> = ({
+  reservationId,
+}) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
-  const [initialData, setInitialData] = useState<ReservationFormData | null>(
-    null
-  );
-
-  const statusOptions = ["PENDING", "CONFIRMED", "CANCELLED"];
+  const [initialData, setInitialData] = useState<Reservation | null>(null);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false); // Initialize with false
 
   const {
     register,
@@ -33,10 +42,17 @@ const EditReservationForm = ({ reservationId }: EditReservationFormProps) => {
     const fetchReservation = async () => {
       try {
         const response = await axios.get(`/api/reservation/${reservationId}`);
-        const reservation = response.data;
+        const reservation: Reservation = response.data;
 
-        setInitialData({ status: reservation.status });
+        setInitialData(reservation);
         setValue("status", reservation.status);
+
+        const tripDate = reservation.travelListing.date
+          ? new Date(reservation.travelListing.date)
+          : null;
+        const currentDate = new Date();
+
+        setIsDisabled(tripDate != null && tripDate <= currentDate); // Update isDisabled state based on the trip date comparison
       } catch (error) {
         console.error("Error fetching reservation: ", error);
       }
@@ -69,6 +85,8 @@ const EditReservationForm = ({ reservationId }: EditReservationFormProps) => {
     return <div>Loading...</div>;
   }
 
+  const { status } = initialData;
+
   return (
     <div>
       <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
@@ -77,19 +95,33 @@ const EditReservationForm = ({ reservationId }: EditReservationFormProps) => {
           className="form-select"
           {...register("status")}
           defaultValue={initialData.status}
+          disabled={isDisabled} // Directly use isDisabled state here
         >
-          {statusOptions.map((status) => (
-            <option key={status} value={status}>
-              {status}
-            </option>
-          ))}
+          <option value="PENDING" disabled={status !== "PENDING"}>
+            PENDING
+          </option>
+          <option value="CONFIRMED" disabled={status === "CONFIRMED"}>
+            CONFIRMED
+          </option>
+          <option value="CANCELLED" disabled={status === "CANCELLED"}>
+            CANCELLED
+          </option>
         </select>
         {errors.status && <div className="error-message">Select Status</div>}
 
-        <button className="form-button" type="submit" disabled={isSubmitting}>
+        <button
+          className="form-button"
+          type="submit"
+          disabled={isSubmitting || isDisabled} // Directly use isDisabled state here
+        >
           {isSubmitting ? "Submitting..." : "Update Status"}
         </button>
         {serverError && <div className="error-message">{serverError}</div>}
+        {isDisabled && (
+          <div className="error-message">
+            Cannot change status because trip date is in the past or today.
+          </div>
+        )}
       </form>
     </div>
   );

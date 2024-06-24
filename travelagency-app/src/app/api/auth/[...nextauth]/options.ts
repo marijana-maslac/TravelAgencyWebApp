@@ -48,6 +48,8 @@ const options: NextAuthOptions = {
     session({ session, token }) {
       if (session.user) {
         session.user.role = token.role || "USER";
+        session.user.id = token.id;
+        session.user.username = token.username;
       }
       return session;
     },

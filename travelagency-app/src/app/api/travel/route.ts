@@ -1,56 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Prisma, PrismaClient } from "@prisma/client";
-import { getServerSession } from "next-auth";
-import options from "../auth/[...nextauth]/options";
 
 const prisma = new PrismaClient();
-
-export async function POST(request: NextRequest) {
-  const session = await getServerSession(options);
-
-  if (!session) {
-    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
-  }
-
-  try {
-    const body = await request.json();
-
-    const { name, description, price, date, endDate, category, priceCategory } =
-      body;
-
-    const formattedDate = new Date(date);
-    const formattedEndDate = new Date(endDate);
-
-    const newTrip = await prisma.travelListing.create({
-      data: {
-        name,
-        description,
-        price,
-        date: formattedDate,
-        endDate: formattedEndDate,
-        category,
-        priceCategory,
-      },
-    });
-
-    return NextResponse.json(newTrip, { status: 201 });
-  } catch (error) {
-    console.error("Server error: ", error);
-    return NextResponse.json({ message: "Server error" }, { status: 500 });
-  }
-}
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const page = parseInt(searchParams.get("page") || "1");
-    const limit = parseInt(searchParams.get("limit") || "5");
     const category = searchParams.get("category") || "";
     const priceCategory = searchParams.get("priceCategory") || "";
     const month = searchParams.get("month") || "";
     const year = searchParams.get("year") || "";
-
-    const offset = (page - 1) * limit;
+    const page = parseInt(searchParams.get("page") || "1", 10);
+    const limit = parseInt(searchParams.get("limit") || "8", 10);
 
     let where: Prisma.TravelListingWhereInput = {};
 
@@ -113,19 +74,21 @@ export async function GET(request: NextRequest) {
       };
     }
 
+    const offset = (page - 1) * limit;
+
     const trips = await prisma.travelListing.findMany({
       where,
       skip: offset,
       take: limit,
     });
 
-    const totalTrips = await prisma.travelListing.count({ where });
+    const totalTripsCount = await prisma.travelListing.count({ where });
+
+    const totalPages = Math.ceil(totalTripsCount / limit);
 
     return NextResponse.json({
       trips,
-      totalTrips,
-      page,
-      totalPages: Math.ceil(totalTrips / limit),
+      totalPages,
     });
   } catch (error) {
     console.error("Server error: ", error);

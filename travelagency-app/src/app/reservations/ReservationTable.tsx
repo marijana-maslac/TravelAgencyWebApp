@@ -6,6 +6,7 @@ import DeleteButton from "./[id]/DeleteButton";
 interface Props {
   reservations: Reservation[];
 }
+
 const ReservationDataTable: React.FC<Props> = ({ reservations }) => {
   return (
     <div>
@@ -13,8 +14,9 @@ const ReservationDataTable: React.FC<Props> = ({ reservations }) => {
       <table className="reservation-table">
         <thead>
           <tr>
-            <th className="reservation-text">User</th>
-            <th className="reservation-text">Travel Listing</th>
+            <th>Reservation ID </th>
+            <th className="reservation-text">User ID</th>
+            <th className="reservation-text">Travel Listing ID</th>
             <th className="reservation-text">Status</th>
             <th className="reservation-text">Created At</th>
           </tr>
@@ -22,6 +24,7 @@ const ReservationDataTable: React.FC<Props> = ({ reservations }) => {
         <tbody>
           {reservations.map((reservation) => (
             <tr key={reservation.id}>
+              <td className="reservation-text">{reservation.id}</td>
               <td className="reservation-text">{reservation.userId}</td>
               <td className="reservation-text">
                 {reservation.travelListingId}
@@ -37,6 +40,8 @@ const ReservationDataTable: React.FC<Props> = ({ reservations }) => {
                 >
                   Edit
                 </Link>
+              </td>
+              <td>
                 <DeleteButton reservationId={reservation.id} />
               </td>
             </tr>

@@ -9,7 +9,7 @@ interface Props {
 
 export async function PATCH(request: NextRequest, { params }: Props) {
   const body = await request.json();
-  // console.log("Request Body:", body);
+  console.log("Request Body:", body);
 
   const validation = userSchema.safeParse(body);
 
