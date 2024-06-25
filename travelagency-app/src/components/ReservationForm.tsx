@@ -31,7 +31,7 @@ const ReservationPage: React.FC<ReservationFormProps> = ({ trip }) => {
         userId: parseInt(userId, 10),
         travelListingId: trip.id,
       });
-      router.push("/reservations");
+      router.push("/myBooking");
       router.refresh();
     } catch (error: any) {
       console.error("Submission error: ", error);

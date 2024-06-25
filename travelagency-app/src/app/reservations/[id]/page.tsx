@@ -18,7 +18,7 @@ const ViewTravel = async ({ params }: Props) => {
         <h3>
           Click <Link href="/api/auth/signin">here</Link> to sign in. <br></br>
           If you don't have an account, click
-          <Link href="/users/addUser"> here</Link> to create an account.
+          <Link href="/registration"> here</Link> to create an account.
         </h3>
       </div>
     );

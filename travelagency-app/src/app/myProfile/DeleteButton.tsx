@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -13,6 +14,7 @@ const DeleteButton = ({ userId }: { userId: number }) => {
       setIsDeleting(true);
       await axios.delete(`/api/myprofile/${userId}`);
       router.push("/");
+      signOut();
     } catch (error) {
       setIsDeleting(false);
       setError("Failed to delete user.");
