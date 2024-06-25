@@ -13,7 +13,7 @@ const DeleteButton = ({ userId }: { userId: number }) => {
     try {
       setIsDeleting(true);
       await axios.delete(`/api/myprofile/${userId}`);
-      router.push("/");
+      router.push("/myProfile");
       signOut();
     } catch (error) {
       setIsDeleting(false);

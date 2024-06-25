@@ -94,6 +94,7 @@ ${formData.name}`;
             <th>Date</th>
             <th>Return Date</th>
             <th>Category</th>
+            <th>Price</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
@@ -113,6 +114,7 @@ ${formData.name}`;
                 )}
               </td>
               <td>{reservation.travelListing.category}</td>
+              <td>{reservation.travelListing.price} €</td>
               <td>{reservation.status}</td>
               <td>
                 {(reservation.status === ReservationStatus.PENDING ||

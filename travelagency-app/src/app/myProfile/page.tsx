@@ -8,7 +8,7 @@ import DeleteButton from "./DeleteButton";
 const MyProfilePage = async () => {
   const session = await getServerSession(options);
   if (!session) {
-    return <p>Not authorized</p>;
+    return <Link href={"/"}> Return to home page</Link>;
   }
   const userEmail = session?.user.email;
   const user = await prisma.user.findFirst({
